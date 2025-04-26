@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terrain Analyzer - Smart Landing Zone Detection</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="images/logo.svg" alt="Terrain Analyzer Logo">
+                <h1>Terrain Analyzer</h1>
+            </div>
+            <ul>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#ml-tech">ML Technology</a></li>
+                <li><a href="#download">Download</a></li>
+                <li class="theme-toggle">
+                    <span class="theme-toggle-icon light-icon">☀️</span>
+                    <label class="theme-toggle-switch">
+                        <input type="checkbox" id="theme-toggle-input">
+                        <span class="theme-toggle-slider"></span>
+                    </label>
+                    <span class="theme-toggle-icon dark-icon">🌙</span>
+                </li>
+            </ul>
+        </nav>
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Precision Landing Zone Detection</h1>
+                <p>Advanced machine learning for autonomous vehicles and drones</p>
+                <a href="#download" class="cta-button">Download App</a>
+            </div>
+            <div class="hero-image">
+                <img src="images/app-preview.svg" alt="App Preview">
+            </div>
+        </div>
+    </header>
+
+    <section id="features" class="features">
+        <h2>Key Features</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <img src="images/icon-ml.svg" alt="Machine Learning Icon">
+                </div>
+                <h3>Machine Learning</h3>
+                <p>TensorFlow Lite powered terrain classification with 92% accuracy for identifying optimal landing zones.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <img src="images/icon-camera.svg" alt="Real-time Analysis Icon">
+                </div>
+                <h3>Real-time Analysis</h3>
+                <p>Process camera feeds in real-time with advanced OpenCV computer vision algorithms.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <img src="images/icon-bluetooth.svg" alt="Wireless Communication Icon">
+                </div>
+                <h3>Wireless Control</h3>
+                <p>Bluetooth integration for sending commands to parachute controllers or landing systems.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <img src="images/icon-toggle.svg" alt="Dual Mode Icon">
+                </div>
+                <h3>Dual Processing</h3>
+                <p>Toggle between traditional computer vision and ML-based analysis for comparison and reliability.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="workflow">
+            <div class="workflow-step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Image Capture</h3>
+                    <p>The app uses your device's camera to capture high-resolution terrain images from above.</p>
+                </div>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Analysis</h3>
+                    <p>Advanced algorithms process the image to detect flat areas, edges, and terrain features.</p>
+                </div>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>ML Classification</h3>
+                    <p>Our trained model determines if the terrain is safe for landing with high confidence.</p>
+                </div>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Command Transmission</h3>
+                    <p>Landing decisions are sent to connected controllers via Bluetooth for autonomous operation.</p>
+                </div>
+            </div>
+        </div>
+        <div class="demo-view">
+            <img src="images/app-workflow.svg" alt="App Workflow Demonstration">
+        </div>
+    </section>
+
+    <section id="ml-tech" class="ml-tech">
+        <h2>Machine Learning Technology</h2>
+        <div class="tech-comparison">
+            <div class="tech-column">
+                <h3>Computer Vision Mode</h3>
+                <ul>
+                    <li>Edge detection with Canny algorithm</li>
+                    <li>Contour analysis for flat surface detection</li>
+
+          <div class="text-center mt-5">
+            <button id="start-app-btn" class="btn btn-primary btn-lg">Start App</button>
+          </div>
+
+                    <li>Geometric feature extraction</li>
+                    <li>Low computational requirements</li>
+                </ul>
+                <div class="tech-image">
+                    <img src="images/cv-analysis.svg" alt="Computer Vision Analysis">
+                </div>
+            </div>
+            <div class="vs-divider">VS</div>
+            <div class="tech-column">
+                <h3>Machine Learning Mode</h3>
+                <ul>
+                    <li>MobileNetV2 architecture</li>
+                    <li>Trained on 2,000+ terrain images</li>
+                    <li>92% classification accuracy</li>
+                    <li>GPU-accelerated processing</li>
+                </ul>
+                <div class="tech-image">
+                    <img src="images/ml-analysis.svg" alt="Machine Learning Analysis">
+                </div>
+            </div>
+        </div>
+        <div class="tech-metrics">
+            <div class="metric">
+                <h4>Accuracy</h4>
+                <div class="metric-bar" style="--percentage: 92%">92%</div>
+            </div>
+            <div class="metric">
+                <h4>Precision</h4>
+                <div class="metric-bar" style="--percentage: 94%">94%</div>
+            </div>
+            <div class="metric">
+                <h4>Recall</h4>
+                <div class="metric-bar" style="--percentage: 89%">89%</div>
+            </div>
+            <div class="metric">
+                <h4>Processing Speed</h4>
+                <div class="metric-bar" style="--percentage: 85%">85%</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="download" class="download">
+        <h2>Download The App</h2>
+        <div class="download-options">
+            <a href="#" class="download-button">
+                <img src="images/google-play.svg" alt="Google Play">
+                <span>Google Play</span>
+            </a>
+            <a href="#" class="download-button">
+                <img src="images/github.svg" alt="GitHub">
+                <span>Source Code</span>
+            </a>
+        </div>
+        <div class="requirements">
+            <h3>Requirements</h3>
+            <ul>
+                <li>Android 7.0 or higher</li>
+                <li>Device with camera</li>
+                <li>Bluetooth capability</li>
+                <li>2GB RAM minimum</li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="images/logo.svg" alt="Terrain Analyzer Logo">
+                <h3>Terrain Analyzer</h3>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h4>App</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#download">Download</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                <div class="link-group">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="#">GitHub</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Terrain Analyzer. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

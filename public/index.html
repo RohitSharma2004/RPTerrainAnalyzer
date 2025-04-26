@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RPTerrain Analyzer - Precision Landing Solutions</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/tf.min.js"></script>
+  <script src="/js/terrain-classifier.js"></script>
+  <script src="/js/video-analysis.js"></script>
+</head>
+<body>
+  <!-- Feature Selection Screen -->
+  <div id="feature-selection" class="feature-selection-screen">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+          <div class="selection-header text-center mb-5">
+            <h1 class="display-4 gradient-text">RPTerrain Analyzer</h1>
+            <p class="lead">Please select the features you'd like to use</p>
+          </div>
+
+          <div class="feature-grid">
+            <div class="feature-card" data-feature="video-analysis">
+              <div class="feature-icon">
+                <i class="fas fa-video"></i>
+              </div>
+              <h3>Real-time Video Analysis</h3>
+              <p>Analyze terrain in real-time through your camera feed</p>
+              <div class="feature-select">
+                <input type="checkbox" id="select-video-analysis" class="feature-checkbox" checked>
+                <label for="select-video-analysis"></label>
+              </div>
+            </div>
+
+            <div class="feature-card" data-feature="image-analysis">
+              <div class="feature-icon">
+                <i class="fas fa-image"></i>
+              </div>
+              <h3>Image Analysis</h3>
+              <p>Upload and analyze terrain images with precision</p>
+              <div class="feature-select">
+                <input type="checkbox" id="select-image-analysis" class="feature-checkbox" checked>
+                <label for="select-image-analysis"></label>
+              </div>
+            </div>
+
+            <div class="feature-card" data-feature="gps-analysis">
+              <div class="feature-icon">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+              <h3>GPS-Based Analysis</h3>
+              <p>Terrain analysis using real-time GPS coordinates</p>
+              <div class="feature-select">
+                <input type="checkbox" id="select-gps-analysis" class="feature-checkbox">
+                <label for="select-gps-analysis"></label>
+              </div>
+            </div>
+
+            <div class="feature-card" data-feature="3d-visualization">
+              <div class="feature-icon">
+                <i class="fas fa-cube"></i>
+              </div>
+              <h3>3D Terrain Visualization</h3>
+              <p>View terrain features in interactive 3D model</p>
+              <div class="feature-select">
+                <input type="checkbox" id="select-3d-visualization" class="feature-checkbox" checked>
+                <label for="select-3d-visualization"></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center mt-5">
+            <button id="start-app-btn" class="btn btn-lg btn-primary pulse-btn">
+              <i class="fas fa-rocket mr-2"></i> Launch RPTerrain Analyzer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Application (initially hidden) -->
+  <div id="main-app" class="main-app" style="display: none;">
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="/images/logo.svg" alt="RPTerrain Analyzer Logo" width="40" height="40" class="d-inline-block align-top">
+        <span class="gradient-brand-text">RPTerrain Analyzer</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link home-link" href="#"> <i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#video-analysis"><i class="fas fa-video"></i> Video Analysis</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#image-analysis"><i class="fas fa-image"></i> Image Analysis</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#how-it-works"><i class="fas fa-cogs"></i> How It Works</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about"><i class="fas fa-info-circle"></i> About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="jumbotron jumbotron-fluid text-white">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-8">
+          <h1 class="display-4 gradient-text">RPTerrain Analyzer</h1>
+          <p class="lead">Advanced ML-powered terrain classification for precision landing zones</p>
+          <div class="feature-badges mb-3">
+            <span class="badge badge-pill badge-light"><i class="fas fa-robot"></i> AI-Powered</span>
+            <span class="badge badge-pill badge-light"><i class="fas fa-map-marked-alt"></i> GPS Integration</span>
+            <span class="badge badge-pill badge-light"><i class="fas fa-cube"></i> 3D Visualization</span>
+            <span class="badge badge-pill badge-light"><i class="fas fa-tachometer-alt"></i> Real-time Analysis</span>
+          </div>
+          <div class="mt-4">
+            <a href="#video-analysis" class="btn btn-light mr-2 btn-hero"><i class="fas fa-video"></i> Video Analysis</a>
+            <a href="#image-analysis" class="btn btn-outline-light mr-2 btn-hero"><i class="fas fa-image"></i> Image Analysis</a>
+            <a href="#gps-analysis" class="btn btn-accent btn-hero"><i class="fas fa-map-marker-alt"></i> GPS Analysis</a>
+          </div>
+        </div>
+        <div class="col-md-4 d-none d-md-block">
+          <div class="hero-image-container">
+            <img src="/images/app-preview.svg" alt="App Preview" class="img-fluid hero-image">
+            <div class="hero-image-glow"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container mb-5">
+    <!-- Real-time Video Analysis Section -->
+    <section id="video-analysis" class="mb-5">
+      <div class="section-header text-center mb-4">
+        <h2><i class="fas fa-video"></i> Real-time Video Analysis</h2>
+        <p class="text-muted">Analyze terrain in real-time using your camera</p>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="card">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+              <h5 class="mb-0">Video Feed</h5>
+              <div>
+                <button id="camera-toggle-btn" class="btn btn-sm btn-light"><i class="fas fa-video"></i> Start Camera</button>
+                <button id="record-btn" class="btn btn-sm btn-danger ml-2" disabled><i class="fas fa-circle"></i> Record</button>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <div class="video-frame">
+                <!-- Video feed container -->
+                <div class="video-feed-container">
+                  <video id="video-feed" class="video-feed" playsinline autoplay muted></video>
+                  <canvas id="canvas-capture" style="display: none;"></canvas>
+                  <canvas id="canvas-overlay" class="video-overlay"></canvas>
+
+                  <!-- Recording indicator -->
+                  <div id="recording-indicator" class="recording-indicator" style="display: none;">
+                    <div class="recording-dot"></div>
+                    <span>RECORDING</span>
+                  </div>
+
+                  <!-- Weather conditions -->
+                  <div class="weather-conditions">
+                    <i class="fas fa-sun weather-icon"></i>
+                    <span>Optimal conditions for analysis</span>
+                  </div>
+                </div>
+
+                <!-- Video controls panel -->
+                <div class="video-control-panel">
+                  <button id="pause-video-btn" class="video-control-btn" disabled><i class="fas fa-pause"></i></button>
+                  <button id="analyze-video-btn" class="video-control-btn" disabled><i class="fas fa-play"></i></button>
+                  <button id="capture-frame-btn" class="video-control-btn" disabled><i class="fas fa-camera"></i></button>
+                  <button id="toggle-overlay-btn" class="video-control-btn" disabled><i class="fas fa-eye"></i></button>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <!-- Analysis mode toggle -->
+              <div class="analysis-toggle mb-3">
+                <input type="radio" name="analysisType" id="toggleCV" checked>
+                <label for="toggleCV">Computer Vision</label>
+                <input type="radio" name="analysisType" id="toggleML">
+                <label for="toggleML">Machine Learning</label>
+                <div class="slider"></div>
+              </div>
+
+              <!-- Additional analysis controls -->
+              <div class="d-flex justify-content-center">
+                <div class="btn-group">
+                  <button id="fps-down-btn" class="btn btn-outline-secondary" disabled><i class="fas fa-minus"></i></button>
+                  <button id="fps-display" class="btn btn-outline-secondary" disabled>5 FPS</button>
+                  <button id="fps-up-btn" class="btn btn-outline-secondary" disabled><i class="fas fa-plus"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3D Terrain Visualization -->
+          <div class="card mt-4">
+            <div class="card-header bg-dark text-white">
+              <h5 class="mb-0">3D Terrain Visualization</h5>
+            </div>
+            <div class="card-body p-0">
+              <div id="terrain-3d-container" class="terrain-3d-container">
+                <div id="terrain-3d" class="terrain-3d">
+                  <div id="terrain-grid" class="terrain-grid"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <!-- Video Analysis Results -->
+          <div class="card mb-4">
+            <div class="card-header bg-success text-white">
+              <h5 class="mb-0">Analysis Results</h5>
+            </div>
+            <div class="card-body">
+              <div id="video-result-indicator" class="terrain-indicator-container mb-4">
+                <div id="video-terrain-indicator" class="terrain-indicator">
+                  <i class="fas fa-question"></i>
+                </div>
+                <div id="video-status-text" class="terrain-status-text bg-secondary">
+                  No Data
+                </div>
+              </div>
+
+              <!-- Real-time statistics -->
+              <div class="analysis-stats">
+                <div class="stat-card">
+                  <h5>Safe Frames</h5>
+                  <div id="safe-frames" class="value">0%</div>
+                </div>
+                <div class="stat-card">
+                  <h5>Confidence</h5>
+                  <div id="avg-confidence" class="value">0%</div>
+                </div>
+                <div class="stat-card">
+                  <h5>Frames</h5>
+                  <div id="total-frames" class="value">0</div>
+                </div>
+                <div class="stat-card">
+                  <h5>Processing</h5>
+                  <div id="processing-time-avg" class="value">0ms</div>
+                </div>
+              </div>
+
+              <!-- Feature trends visualization -->
+              <div class="mt-4">
+                <h6>Feature Trends</h6>
+                <div class="progress mb-2">
+                  <div id="feature-flatness" class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">Flatness</div>
+                </div>
+                <div class="progress mb-2">
+                  <div id="feature-texture" class="progress-bar bg-info" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">Texture</div>
+                </div>
+                <div class="progress mb-2">
+                  <div id="feature-edges" class="progress-bar bg-warning" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">Edges</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- System Status & Activity Log -->
+          <div class="card mb-4">
+            <div class="card-header bg-info text-white">
+              <h5 class="mb-0">System Status</h5>
+            </div>
+            <div class="card-body">
+              <div class="status-indicator mb-3">
+                <div class="d-flex align-items-center">
+                  <div class="status-dot" id="camera-status"></div>
+                  <div class="status-label">Camera</div>
+                </div>
+                <div class="status-text" id="camera-status-text">Ready</div>
+              </div>
+
+              <div class="status-indicator mb-3">
+                <div class="d-flex align-items-center">
+                  <div class="status-dot" id="ml-status"></div>
+                  <div class="status-label">ML System</div>
+                </div>
+                <div class="status-text" id="ml-status-text">Initialized</div>
+              </div>
+
+              <div class="status-indicator">
+                <div class="d-flex align-items-center">
+                  <div class="status-dot" id="bluetooth-status"></div>
+                  <div class="status-label">Controller</div>
+                </div>
+                <div class="status-text" id="bluetooth-status-text">Simulated</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity Log -->
+          <div class="card">
+            <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
+              <h5 class="mb-0">Activity Log</h5>
+              <button id="clear-log-btn" class="btn btn-sm btn-light"><i class="fas fa-trash"></i></button>
+            </div>
+            <div class="card-body p-0">
+              <div id="activity-log" class="activity-log">
+                <div class="log-entry">
+                  <span class="log-time">00:00:00</span>
+                  <span class="log-message">System initialized</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Image Analysis Section -->
+    <section id="image-analysis" class="mb-5">
+      <div class="section-header text-center mb-4">
+        <h2><i class="fas fa-image"></i> Image Analysis</h2>
+        <p class="text-muted">Upload and analyze terrain images</p>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h5 class="mb-0">Image Analyzer</h5>
+            </div>
+            <div class="card-body">
+              <!-- Image upload and display area -->
+              <div class="image-upload-container mb-4">
+                <div id="preview-container" class="preview-container mb-3">
+                  <img id="preview-image" class="img-fluid d-none" alt="Preview">
+                  <div id="upload-prompt" class="upload-prompt">
+                    <i class="fas fa-cloud-upload-alt fa-3x mb-3"></i>
+                    <p>Drag & drop an image or click to select</p>
+                  </div>
+                </div>
+
+                <form id="upload-form" enctype="multipart/form-data">
+                  <div class="custom-file mb-3">
+                    <input type="file" class="custom-file-input" id="imageInput" name="image" accept="image/*">
+                    <label class="custom-file-label" for="imageInput">Choose image</label>
+                  </div>
+
+                  <div class="processing-options mb-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="mlToggle" checked>
+                        <label class="custom-control-label" for="mlToggle">Use Machine Learning</label>
+                      </div>
+                      <span class="text-muted">More accurate but slower</span>
+                    </div>
+                  </div>
+
+                  <button type="submit" id="analyze-btn" class="btn btn-primary btn-lg btn-block btn-icon" disabled>
+                    <i class="fas fa-search"></i> Analyze Terrain
+                  </button>
+                </form>
+              </div>
+
+              <!-- Processing indicator -->
+              <div id="processing-indicator" class="text-center d-none">
+                <div class="spinner-border enhanced text-primary" role="status">
+                  <span class="sr-only">Processing...</span>
+                </div>
+                <p class="mt-3">Analyzing terrain using advanced algorithms...</p>
+              </div>
+
+              <!-- Results display area -->
+              <div id="results-container" class="results-container d-none">
+                <div class="terrain-status mb-4">
+                  <h4>Terrain Analysis Result:</h4>
+                  <div class="terrain-indicator-container">
+                    <div id="terrain-indicator" class="terrain-indicator"></div>
+                    <div id="terrain-status-text" class="terrain-status-text"></div>
+                  </div>
+                </div>
+
+                <div class="results-details">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="card mb-3">
+                        <div class="card-header">Processing Details</div>
+                        <div class="card-body">
+                          <p><strong>Method:</strong> <span id="processing-method"></span></p>
+                          <p><strong>Processing Time:</strong> <span id="processing-time"></span></p>
+                          <p id="confidence-container"><strong>Confidence:</strong> <span id="confidence-score"></span></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="card mb-3">
+                        <div class="card-header">Feature Analysis</div>
+                        <div class="card-body" id="feature-details">
+                          <!-- Feature details will be populated by JavaScript -->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="card">
+                        <div class="card-header">Analysis Visualization</div>
+                        <div class="card-body feature-visualization">
+                          <img id="analysis-visualization" src="/images/ml-analysis.svg" alt="Analysis Visualization" class="d-none">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="action-buttons mt-4">
+                  <button id="send-command-btn" class="btn btn-success btn-lg mr-2 btn-icon">
+                    <i class="fas fa-paper-plane"></i> Send Landing Command
+                  </button>
+                  <button id="reset-btn" class="btn btn-secondary btn-lg btn-icon">
+                    <i class="fas fa-redo"></i> Reset
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <!-- Analysis Comparison -->
+          <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+              <h5 class="mb-0">Analysis Methods</h5>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="analysis-type-card cv-card">
+                    <img src="/images/icon-camera.svg" alt="CV Analysis">
+                    <h4>Computer Vision</h4>
+                    <p>Traditional image processing</p>
+                    <div class="badge badge-primary">Fast</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="analysis-type-card ml-card">
+                    <img src="/images/icon-ml.svg" alt="ML Analysis">
+                    <h4>Machine Learning</h4>
+                    <p>AI-based classification</p>
+                    <div class="badge badge-success">Accurate</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Analyses -->
+          <div class="card">
+            <div class="card-header bg-info text-white">
+              <h5 class="mb-0">Analysis Samples</h5>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <img src="/images/cv-analysis.svg" alt="CV Analysis Example" class="img-fluid mb-2">
+                <p class="text-center mb-0"><small>Computer Vision Analysis Example</small></p>
+              </div>
+              <div>
+                <img src="/images/ml-analysis.svg" alt="ML Analysis Example" class="img-fluid mb-2">
+                <p class="text-center mb-0"><small>Machine Learning Analysis Example</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="bg-light py-5">
+    <div class="container">
+      <div class="section-header text-center mb-5">
+        <h2><i class="fas fa-cogs"></i> How It Works</h2>
+        <p class="text-muted">The technology behind our terrain analysis</p>
+      </div>
+
+      <div class="row mb-5">
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header bg-primary text-white">
+              <h4 class="mb-0">Computer Vision Processing</h4>
+            </div>
+            <div class="card-body">
+              <p>Our traditional approach uses OpenCV algorithms to:</p>
+              <ul>
+                <li>Detect edges with the Canny algorithm</li>
+                <li>Find contours to identify flat surfaces</li>
+                <li>Analyze contour shapes to determine terrain flatness</li>
+                <li>Make a binary safe/unsafe landing decision</li>
+              </ul>
+              <img src="/images/cv-analysis.svg" alt="CV Analysis" class="img-fluid mt-3">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header bg-success text-white">
+              <h4 class="mb-0">Machine Learning Analysis</h4>
+            </div>
+            <div class="card-body">
+              <p>Our ML approach leverages TensorFlow to:</p>
+              <ul>
+                <li>Use a MobileNetV2 model trained on terrain images</li>
+                <li>Extract texture and gradient features</li>
+                <li>Provide confidence scores for landing decisions</li>
+                <li>Identify specific safe landing regions in the image</li>
+              </ul>
+              <img src="/images/ml-analysis.svg" alt="ML Analysis" class="img-fluid mt-3">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comparison-chart">
+        <h4 class="text-center mb-3">Comparison: CV vs. ML</h4>
+        <table class="table table-bordered">
+          <thead class="thead-dark">
+            <tr>
+              <th>Feature</th>
+              <th>Computer Vision</th>
+              <th>Machine Learning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Processing Speed</td>
+              <td>Faster (50-80ms)</td>
+              <td>Slower (200-300ms)</td>
+            </tr>
+            <tr>
+              <td>Accuracy</td>
+              <td>Good in simple terrain</td>
+              <td>Better in complex terrain (92% accuracy)</td>
+            </tr>
+            <tr>
+              <td>Confidence Score</td>
+              <td>Not available</td>
+              <td>Provides percentage confidence</td>
+            </tr>
+            <tr>
+              <td>Feature Analysis</td>
+              <td>Basic geometric analysis</td>
+              <td>Advanced texture and pattern recognition</td>
+            </tr>
+            <tr>
+              <td>Real-time Analysis</td>
+              <td>Up to 15 FPS</td>
+              <td>Up to 5 FPS</td>
+            </tr>
+            <tr>
+              <td>Power Consumption</td>
+              <td>Lower</td>
+              <td>Higher</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="row mt-5">
+        <div class="col-md-4">
+          <div class="data-card">
+            <h5>Image Processing</h5>
+            <p>Our system processes images through multiple stages including normalization, feature extraction, and classification to determine terrain safety.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="data-card">
+            <h5>Video Analysis</h5>
+            <p>Real-time video processing enables continuous terrain monitoring, allowing for dynamic safety assessments as the landing zone comes into view.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="data-card">
+            <h5>Landing Control</h5>
+            <p>Analysis results are transmitted to the controller, which adjusts parachute cords to guide the landing system toward safe areas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-5">
+    <div class="container">
+      <div class="section-header text-center mb-5">
+        <h2><i class="fas fa-info-circle"></i> About This Application</h2>
+        <p class="text-muted">Advanced terrain analysis for precision landing</p>
+      </div>
+
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <img src="/images/app-workflow.svg" alt="App Workflow" class="img-fluid mb-4 mb-md-0">
+        </div>
+        <div class="col-md-6">
+          <p>
+            This web application simulates the core functionality of the Terrain Analyzer Pro Android app.
+            While the actual app processes real camera images on-device and communicates with physical parachute controllers,
+            this simulation demonstrates the advanced interface and analysis capabilities.
+          </p>
+          <p>
+            <strong>Key Features:</strong>
+          </p>
+          <ul>
+            <li>Advanced machine learning terrain classification</li>
+            <li>Real-time video feed analysis</li>
+            <li>Static image processing and visualization</li>
+            <li>Both ML and CV processing methods</li>
+            <li>Simulated communication with landing controller</li>
+            <li>Detailed feature analysis and visualization</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GPS-Based Analysis Section -->
+  <section id="gps-analysis" class="mb-5">
+    <div class="section-header text-center mb-4">
+      <h2><i class="fas fa-map-marker-alt"></i> GPS-Based Terrain Analysis</h2>
+      <p class="text-muted">Real-time terrain analysis using current GPS location</p>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="card">
+          <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Location Map</h5>
+            <div>
+              <button id="locate-btn" class="btn btn-sm btn-light"><i class="fas fa-crosshairs"></i> Get Current Location</button>
+              <button id="analyze-location-btn" class="btn btn-sm btn-success ml-2" disabled><i class="fas fa-search-location"></i> Analyze Area</button>
+            </div>
+          </div>
+          <div class="card-body p-0">
+            <div class="map-container">
+              <div id="location-map" class="location-map">
+                <!-- Map will be loaded here -->
+                <div class="map-placeholder">
+                  <i class="fas fa-map-marked-alt"></i>
+                  <p>GPS map will be displayed here</p>
+                </div>
+              </div>
+              <div class="coordinates-display">
+                <div class="coordinate">
+                  <span class="coordinate-label">Latitude:</span>
+                  <span id="latitude-display" class="coordinate-value">--.--.--</span>
+                </div>
+                <div class="coordinate">
+                  <span class="coordinate-label">Longitude:</span>
+                  <span id="longitude-display" class="coordinate-value">--.--.--</span>
+                </div>
+                <div class="coordinate">
+                  <span class="coordinate-label">Altitude:</span>
+                  <span id="altitude-display" class="coordinate-value">-- m</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Satellite Imagery Analysis -->
+        <div class="card mt-4">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Satellite Imagery Analysis</h5>
+          </div>
+          <div class="card-body">
+            <div class="satellite-imagery">
+              <div id="satellite-image" class="satellite-image">
+                <!-- Satellite image will be displayed here -->
+                <div class="image-placeholder">
+                  <i class="fas fa-satellite"></i>
+                  <p>Satellite imagery will be displayed here</p>
+                </div>
+              </div>
+
+              <!-- Safe landing zone highlights will be overlaid here -->
+              <div id="landing-zones-overlay" class="landing-zones-overlay"></div>
+            </div>
+
+            <div class="analysis-options mt-3">
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="show-safe-zones" checked>
+                <label class="custom-control-label" for="show-safe-zones">Highlight Safe Landing Zones</label>
+              </div>
+              <div class="custom-control custom-switch mt-2">
+                <input type="checkbox" class="custom-control-input" id="terrain-heatmap">
+                <label class="customcontrol-label" for="terrain-heatmap">Show Terrain Heatmap</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <!-- GPS Analysis Results -->
+        <div class="card mb-4">
+          <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Terrain Assessment</h5>
+          </div>
+          <div class="card-body">
+            <div id="gps-result-indicator" class="terrain-indicator-container mb-4">
+              <div id="gps-terrain-indicator" class="terrain-indicator">
+                <i class="fas fa-question"></i>
+              </div>
+              <div id="gps-status-text" class="terrain-status-text bg-secondary">
+                No Data
+              </div>
+            </div>
+
+            <!-- Location details -->
+            <div class="location-details">
+              <h6 class="mb-3">Terrain Characteristics</h6>
+              <div class="detail-row">
+                <div class="detail-label">Elevation:</div>
+                <div id="elevation-value" class="detail-value">-- m</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Slope:</div>
+                <div id="slope-value" class="detail-value">-- %</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Roughness:</div>
+                <div id="roughness-value" class="detail-value">--</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Surface:</div>
+                <div id="surface-value" class="detail-value">--</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-label">Obstacles:</div>
+                <div id="obstacles-value" class="detail-value">--</div>
+              </div>
+            </div>
+
+            <!-- Safe zones count -->
+            <div class="safe-zones-summary mt-4">
+              <h6 class="mb-3">Safe Landing Zones</h6>
+              <div class="zones-count">
+                <div class="count-value" id="safe-zones-count">0</div>
+                <div class="count-label">zones detected</div>
+              </div>
+              <div class="zones-size mt-2">
+                <div class="detail-label">Largest Zone Size:</div>
+                <div id="largest-zone-value" class="detail-value">-- m²</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Area Weather -->
+        <div class="card mb-4">
+          <div class="card-header bg-info text-white">
+            <h5 class="mb-0">Area Weather</h5>
+          </div>
+          <div class="card-body">
+            <div class="weather-display">
+              <div class="weather-main">
+                <div class="weather-icon">
+                  <i class="fas fa-sun"></i>
+                </div>
+                <div class="weather-temp">23°C</div>
+              </div>
+              <div class="weather-details">
+                <div class="weather-detail">
+                  <i class="fas fa-wind"></i>
+                  <span id="wind-value">3.2 m/s</span>
+                </div>
+                <div class="weather-detail">
+                  <i class="fas fa-tint"></i>
+                  <span id="humidity-value">45%</span>
+                </div>
+                <div class="weather-detail">
+                  <i class="fas fa-compress-arrows-alt"></i>
+                  <span id="pressure-value">1012 hPa</span>
+                </div>
+              </div>
+            </div>
+            <div class="landing-conditions mt-3">
+              <h6>Landing Conditions:</h6>
+              <div class="conditions-indicator safe">
+                <i class="fas fa-check-circle"></i>
+                <span>Favorable for landing</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </div> <!-- End of main-app div -->
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5>RPTerrain Analyzer</h5>
+          <p>Advanced terrain analysis for precision landing zones</p>
+          <p>Created by Rohit Sharma and Praveen Pal</p>
+          <div class="social-icons">
+            <a href="https://github.com/RohitSharma2004" target="_blank" class="text-white mr-3"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/rohit-sharma-04b913223/" target="_blank" class="text-white mr-3"><i class="fab fa-linkedin"></i></a>
+            <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        <div class="col-md-6 text-md-right">
+          <p>&copy; 2025 RPTerrain Analyzer. All rights reserved.</p>
+          <p class="mb-0"><small>Version 3.0.1</small></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Dark Mode Toggle Button -->
+  <div class="dark-mode-toggle">
+    <i class="fas fa-moon"></i>
+  </div>
+
+  <!-- Color Theme Toggle -->
+  <div class="color-theme-toggle">
+    <button class="theme-btn theme-default active" data-theme="default"></button>
+    <button class="theme-btn theme-blue" data-theme="blue"></button>
+    <button class="theme-btn theme-green" data-theme="green"></button>
+    <button class="theme-btn theme-purple" data-theme="purple"></button>
+    <button class="theme-btn theme-orange" data-theme="orange"></button>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/main.js"></script>
+  <script src="/js/gps-analyzer.js"></script>
+</body>
+</html>

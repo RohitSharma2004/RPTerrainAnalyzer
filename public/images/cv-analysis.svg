@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="terrainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8D6E63"/>
+      <stop offset="100%" stop-color="#5D4037"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect x="0" y="0" width="300" height="200" fill="#F5F7FA" rx="5" ry="5"/>
+  
+  <!-- Image with CV analysis -->
+  <rect x="20" y="20" width="260" height="160" fill="#E4E7EB" rx="2" ry="2"/>
+  
+  <!-- Terrain image - darker part (mountains, rough terrain) -->
+  <path d="M20 180 L120 80 L180 140 L260 70 L280 90 L280 180 Z" fill="url(#terrainGradient)"/>
+  
+  <!-- Terrain image - flat areas (green) -->
+  <path d="M20 180 L90 150 L160 160 L230 150 L280 180 Z" fill="#8BC34A"/>
+  
+  <!-- Edge detection lines -->
+  <path d="M20 180 L120 80" stroke="#F44336" stroke-width="1.5" fill="none"/>
+  <path d="M120 80 L180 140" stroke="#F44336" stroke-width="1.5" fill="none"/>
+  <path d="M180 140 L260 70" stroke="#F44336" stroke-width="1.5" fill="none"/>
+  <path d="M90 150 L160 160" stroke="#4CAF50" stroke-width="1.5" fill="none"/>
+  <path d="M160 160 L230 150" stroke="#4CAF50" stroke-width="1.5" fill="none"/>
+  
+  <!-- Contour marking for flat region -->
+  <path d="M60 160 L210 160 L210 170 L60 170 Z" stroke="#4CAF50" stroke-width="2" fill="#4CAF50" fill-opacity="0.2"/>
+  
+  <!-- Contour points -->
+  <circle cx="60" cy="160" r="3" fill="#4CAF50"/>
+  <circle cx="210" cy="160" r="3" fill="#4CAF50"/>
+  <circle cx="210" cy="170" r="3" fill="#4CAF50"/>
+  <circle cx="60" cy="170" r="3" fill="#4CAF50"/>
+  
+  <!-- Edge points for rough regions -->
+  <circle cx="120" cy="80" r="3" fill="#F44336"/>
+  <circle cx="180" cy="140" r="3" fill="#F44336"/>
+  <circle cx="260" cy="70" r="3" fill="#F44336"/>
+  
+  <!-- CV Analysis overlay text -->
+  <rect x="20" y="20" width="90" height="25" fill="#102A43" fill-opacity="0.7"/>
+  <text x="30" y="37" font-family="Arial" font-size="12" fill="white">CV ANALYSIS</text>
+  
+  <!-- Terrain indicator text -->
+  <rect x="170" y="20" width="110" height="25" fill="#4CAF50" fill-opacity="0.7"/>
+  <text x="180" y="37" font-family="Arial" font-size="12" fill="white">FLAT TERRAIN</text>
+  
+  <!-- Details -->
+  <rect x="20" y="50" width="80" height="85" fill="white" fill-opacity="0.7"/>
+  <text x="25" y="65" font-family="Arial" font-size="8" fill="#333">Contours: 12</text>
+  <text x="25" y="80" font-family="Arial" font-size="8" fill="#333">Edges: 37</text>
+  <text x="25" y="95" font-family="Arial" font-size="8" fill="#333">Flat regions: 3</text>
+  <text x="25" y="110" font-family="Arial" font-size="8" fill="#333">Roughness: Low</text>
+  <text x="25" y="125" font-family="Arial" font-size="8" fill="#333">Processing: 63ms</text>
+</svg>

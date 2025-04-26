@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradientCamera" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#29B6F6"/>
+      <stop offset="100%" stop-color="#0277BD"/>
+    </linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="45" fill="#F5F7FA" stroke="#E4E7EB" stroke-width="2"/>
+  
+  <!-- Camera Body -->
+  <rect x="20" y="35" width="60" height="40" rx="5" ry="5" fill="url(#gradientCamera)"/>
+  
+  <!-- Camera Top -->
+  <rect x="35" y="30" width="30" height="5" rx="2" ry="2" fill="#0277BD"/>
+  
+  <!-- Camera Lens -->
+  <circle cx="50" cy="55" r="15" fill="#102A43" stroke="#F5F7FA" stroke-width="2"/>
+  <circle cx="50" cy="55" r="10" fill="#0D47A1" stroke="#F5F7FA" stroke-width="1"/>
+  <circle cx="50" cy="55" r="5" fill="#064785" stroke="#F5F7FA" stroke-width="0.5"/>
+  
+  <!-- Flash -->
+  <rect x="65" y="40" width="8" height="8" rx="2" ry="2" fill="#FFCA28"/>
+  
+  <!-- Viewfinder Frame -->
+  <path d="M30 45 L35 45 M30 45 L30 50" stroke="#F5F7FA" stroke-width="2" stroke-linecap="round"/>
+  <path d="M70 45 L65 45 M70 45 L70 50" stroke="#F5F7FA" stroke-width="2" stroke-linecap="round"/>
+  <path d="M30 65 L35 65 M30 65 L30 60" stroke="#F5F7FA" stroke-width="2" stroke-linecap="round"/>
+  <path d="M70 65 L65 65 M70 65 L70 60" stroke="#F5F7FA" stroke-width="2" stroke-linecap="round"/>
+</svg>

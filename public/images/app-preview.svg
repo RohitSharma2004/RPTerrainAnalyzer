@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradientBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#102A43"/>
+      <stop offset="100%" stop-color="#1A365D"/>
+    </linearGradient>
+    <linearGradient id="gradientTerrain" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="100%" stop-color="#2E7D32"/>
+    </linearGradient>
+    <linearGradient id="gradientSky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#29B6F6"/>
+      <stop offset="100%" stop-color="#0277BD"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Phone Frame -->
+  <rect x="100" y="10" width="200" height="280" rx="20" ry="20" fill="url(#gradientBg)" stroke="#333" stroke-width="3"/>
+  
+  <!-- Screen -->
+  <rect x="110" y="30" width="180" height="240" rx="3" ry="3" fill="#F5F7FA"/>
+  
+  <!-- Camera -->
+  <circle cx="200" cy="20" r="4" fill="#333"/>
+  
+  <!-- App Interface -->
+  <!-- App Bar -->
+  <rect x="110" y="30" width="180" height="30" fill="#1E88E5"/>
+  <text x="125" y="50" font-family="Arial" font-size="14" fill="white">Terrain Analyzer</text>
+  
+  <!-- Preview Area -->
+  <rect x="120" y="70" width="160" height="100" rx="5" ry="5" fill="#E4E7EB"/>
+  
+  <!-- Camera Preview: Terrain Image -->
+  <rect x="125" y="75" width="150" height="90" fill="#D3D3D3"/>
+  
+  <!-- Sky part of the preview -->
+  <rect x="125" y="75" width="150" height="40" fill="url(#gradientSky)"/>
+  
+  <!-- Terrain part with contours -->
+  <rect x="125" y="115" width="150" height="50" fill="url(#gradientTerrain)"/>
+  
+  <!-- Contour lines on terrain -->
+  <path d="M125 130 Q145 125, 165 130 Q185 135, 205 130 Q225 125, 245 130 Q265 135, 275 130" fill="none" stroke="white" stroke-width="1" stroke-opacity="0.6"/>
+  <path d="M125 140 Q150 145, 175 135 Q200 125, 225 135 Q250 145, 275 140" fill="none" stroke="white" stroke-width="1" stroke-opacity="0.6"/>
+  <path d="M125 150 Q140 145, 155 150 Q170 155, 185 150 Q200 145, 215 150 Q230 155, 245 150 Q260 145, 275 150" fill="none" stroke="white" stroke-width="1" stroke-opacity="0.6"/>
+  <path d="M125 160 Q150 155, 175 160 Q200 165, 225 160 Q250 155, 275 160" fill="none" stroke="white" stroke-width="1" stroke-opacity="0.6"/>
+  
+  <!-- Machine Learning Overlay -->
+  <rect x="175" y="115" width="50" height="30" fill="#4CAF50" fill-opacity="0.4" stroke="#4CAF50" stroke-width="1"/>
+  <rect x="175" y="115" width="50" height="30" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="200" y="135" font-family="Arial" font-size="8" fill="white" text-anchor="middle">SAFE ZONE</text>
+  
+  <!-- Controls and UI Elements -->
+  <rect x="120" y="180" width="75" height="30" rx="5" ry="5" fill="#1E88E5"/>
+  <text x="157.5" y="200" font-family="Arial" font-size="12" fill="white" text-anchor="middle">Capture</text>
+  
+  <rect x="205" y="180" width="75" height="30" rx="5" ry="5" fill="#4CAF50"/>
+  <text x="242.5" y="200" font-family="Arial" font-size="12" fill="white" text-anchor="middle">Analyze</text>
+  
+  <!-- Status Indicators -->
+  <rect x="120" y="220" width="160" height="40" rx="5" ry="5" fill="#F5F7FA" stroke="#E4E7EB" stroke-width="1"/>
+  
+  <!-- Status Dots -->
+  <circle cx="130" cy="230" r="5" fill="#4CAF50"/>
+  <text x="140" y="233" font-family="Arial" font-size="8" fill="#333">Camera Ready</text>
+  
+  <circle cx="130" cy="245" r="5" fill="#4CAF50"/>
+  <text x="140" y="248" font-family="Arial" font-size="8" fill="#333">ML Active (92% Confidence)</text>
+  
+  <circle cx="200" cy="230" r="5" fill="#FFC107"/>
+  <text x="210" y="233" font-family="Arial" font-size="8" fill="#333">Bluetooth</text>
+  
+  <!-- Status Text -->
+  <text x="200" cy="260" font-family="Arial" font-size="10" fill="#333" text-anchor="middle">FLAT TERRAIN DETECTED</text>
+  
+  <!-- Home Button -->
+  <rect x="175" y="275" width="50" height="5" rx="2.5" ry="2.5" fill="#333"/>
+</svg>
